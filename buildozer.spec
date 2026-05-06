@@ -6,25 +6,22 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 1.0
 
-# المكتبات المطلوبة والمدعومة
+# المتطلبات الأساسية والمستقرة
 requirements = python3,kivy,pyjnius
 
 orientation = portrait
 fullscreen = 1
 
-# الإعدادات الرسمية المتوافقة لضمان نجاح الـ toolchain
+# التوليفة الذهبية المتوافقة مع سيرفرات جيت هاب لمنع تعطل الـ Toolchain
 android.api = 33
 android.minapi = 21
 android.ndk = 25b
 android.ndk_api = 21
 android.archs = arm64-v8a
 
-# تفعيل الصلاحية المطلوبة للظهور في الأعلى وقبول الرخص
-android.permissions = SYSTEM_ALERT_WINDOW
+# تفعيل قبول رخص جوجل تلقائياً والصلاحيات
 android.accept_sdk_license = True
-
-# إعدادات المترجم لـ جيت هاب
-p4a.branch = master
+android.permissions = SYSTEM_ALERT_WINDOW
 
 [buildozer]
 log_level = 2
