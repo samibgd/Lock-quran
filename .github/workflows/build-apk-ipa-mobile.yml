@@ -2,8 +2,8 @@ name: Build Kivy APK with Buildozer
 
 on:
   push:
-    branches: [ main, master ] # يشتغل تلقائياً عند رفع الكود
-  workflow_dispatch: # يتيح لك تشغيل البناء يدوياً بضغطة زر
+    branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -28,6 +28,17 @@ jobs:
         pip install --upgrade pip
         pip install buildozer cython virtualenv
 
+    - name: Accept Android SDK Licenses
+      run: |
+        mkdir -p ~/.android
+        touch ~/.android/repositories.cfg
+        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+    - name: Clean Old Cache
+      run: |
+        # هذا الأمر السحري سيمسح أي خطأ قديم معلق في السيرفر رغماً عنه
+        buildozer android clean
+
     - name: Build APK with Buildozer
       run: |
         buildozer -v android debug
@@ -39,3 +50,4 @@ jobs:
       with:
         name: Premium-Locker-APK
         path: bin/*.apk
+    
