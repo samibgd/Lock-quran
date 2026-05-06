@@ -1,4 +1,4 @@
-name: Build Kivy APK with Buildozer
+name: Ultimate Kivy APK Builder
 
 on:
   push:
@@ -34,20 +34,19 @@ jobs:
         touch ~/.android/repositories.cfg
         yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
-    - name: Clean Old Cache
+    - name: Clean Cache
       run: |
-        # هذا الأمر السحري سيمسح أي خطأ قديم معلق في السيرفر رغماً عنه
         buildozer android clean
 
-    - name: Build APK with Buildozer
+    - name: Build APK Final
       run: |
         buildozer -v android debug
       env:
         ACCEPT_SDK_LICENSE: "y"
 
-    - name: Upload finished APK Artifact
+    - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: Premium-Locker-APK
+        name: My-Finished-APK
         path: bin/*.apk
-    
+            
